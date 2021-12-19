@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 import de.jan.boot.model.AppUser;
 import de.jan.boot.model.Dish;
 import de.jan.boot.model.Schedule;
-import de.jan.boot.service.DishService;
+import de.jan.boot.service.PersistenceService;
 
 @RestController
 public class DishController {
 
 	@Autowired
-	private DishService dishService;
+	private PersistenceService dishService;
 	
 	@RequestMapping("/")
 	public Dish home( ) {

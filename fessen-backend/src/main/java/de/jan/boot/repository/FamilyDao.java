@@ -2,8 +2,8 @@ package de.jan.boot.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import de.jan.boot.model.Dish;
+import de.jan.boot.model.Family;
 
-public interface DishDao extends JpaRepository<Dish, Long> {
+public interface FamilyDao extends JpaRepository<Family, Long> {
 	
 }

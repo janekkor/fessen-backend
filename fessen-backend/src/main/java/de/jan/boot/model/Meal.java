@@ -4,36 +4,32 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
- * Member meal association class
+ * Meal class
  *
  */
 @Entity
-@Table(name="SCHEDULE")
-public class Schedule
+@Table(name="MEAL")
+public class Meal
 {
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID")
 	private Long id;
 	
-	@OneToOne
-	@JoinColumn(name = "MEMBER")
-	private Member member;
+	@Column(name="NAME")
+	private String name;
 	
-	@OneToOne
-	@JoinColumn(name="MEAL")
-	private Meal meal;
-	
-	@Column(name="DAY")
-	private Date day;
+	@Column(name="DESCRIPTION")
+	private String description;
 	
 	@Column(name="CREATION_TIME")
 	private Date creationTime;	
@@ -45,23 +41,24 @@ public class Schedule
 	//Modification user
 	@Column(name="MOD_USER")
 	private String modUser;
-
-	public Schedule() {
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Family family;	
+	
+	public Meal() {
 		//empty for hibernate
 	}
 
-	public Schedule(Member member, Meal meal, Date day, Date creationTime, Date modTime, String modUser) {
+	public Meal(String name, String description, Date creationTime, Date modTime, String modUser, Family family) {
 		super();
-		this.member = member;
-		this.meal = meal;
-		this.day = day;
+		this.name = name;
+		this.description = description;
 		this.creationTime = creationTime;
 		this.modTime = modTime;
 		this.modUser = modUser;
+		this.family = family;
 	}
 
-	
-	
 	public Long getId() {
 		return id;
 	}
@@ -70,28 +67,20 @@ public class Schedule
 		this.id = id;
 	}
 
-	public Member getMember() {
-		return member;
+	public String getName() {
+		return name;
 	}
 
-	public void setMember(Member member) {
-		this.member = member;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public Meal getMeal() {
-		return meal;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setMeal(Meal meal) {
-		this.meal = meal;
-	}
-
-	public Date getDay() {
-		return day;
-	}
-
-	public void setDay(Date day) {
-		this.day = day;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public Date getCreationTime() {
@@ -118,6 +107,14 @@ public class Schedule
 		this.modUser = modUser;
 	}
 
+	public Family getFamily() {
+		return family;
+	}
+
+	public void setFamily(Family family) {
+		this.family = family;
+	}
+
 	@Override
 	public int hashCode() {
 		return getClass().hashCode();
@@ -131,31 +128,26 @@ public class Schedule
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Schedule other = (Schedule) obj;
+		Meal other = (Meal) obj;
 		if (creationTime == null) {
 			if (other.creationTime != null)
 				return false;
 		} else if (!creationTime.equals(other.creationTime))
 			return false;
-		if (day == null) {
-			if (other.day != null)
+		if (description == null) {
+			if (other.description != null)
 				return false;
-		} else if (!day.equals(other.day))
+		} else if (!description.equals(other.description))
+			return false;
+		if (family == null) {
+			if (other.family != null)
+				return false;
+		} else if (!family.equals(other.family))
 			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
-			return false;
-		if (meal == null) {
-			if (other.meal != null)
-				return false;
-		} else if (!meal.equals(other.meal))
-			return false;
-		if (member == null) {
-			if (other.member != null)
-				return false;
-		} else if (!member.equals(other.member))
 			return false;
 		if (modTime == null) {
 			if (other.modTime != null)
@@ -167,12 +159,17 @@ public class Schedule
 				return false;
 		} else if (!modUser.equals(other.modUser))
 			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Schedule [id=" + id + ", member=" + member + ", meal=" + meal + ", day=" + day + ", creationTime="
-				+ creationTime + ", modTime=" + modTime + ", modUser=" + modUser + "]";
+		return "Meal [id=" + id + ", name=" + name + ", description=" + description + ", creationTime=" + creationTime
+				+ ", modTime=" + modTime + ", modUser=" + modUser + ", family=" + family + "]";
 	}
 }

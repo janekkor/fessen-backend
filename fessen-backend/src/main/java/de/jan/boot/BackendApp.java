@@ -8,10 +8,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *
  */
 @SpringBootApplication
-public class ServerApp 
+public class BackendApp 
 {
     public static void main( String[] args )
     {
-    	SpringApplication.run(ServerApp.class, args);
+    	SpringApplication.run(BackendApp.class, args);
     }
 }

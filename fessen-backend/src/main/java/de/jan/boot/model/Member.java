@@ -4,36 +4,28 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
- * Member meal association class
+ * Member belonging to a family
  *
  */
 @Entity
-@Table(name="SCHEDULE")
-public class Schedule
+@Table(name="MEMBER")
+public class Member
 {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID")
 	private Long id;
 	
-	@OneToOne
-	@JoinColumn(name = "MEMBER")
-	private Member member;
-	
-	@OneToOne
-	@JoinColumn(name="MEAL")
-	private Meal meal;
-	
-	@Column(name="DAY")
-	private Date day;
+	@Column(name="NAME")
+	private String name;
 	
 	@Column(name="CREATION_TIME")
 	private Date creationTime;	
@@ -45,23 +37,23 @@ public class Schedule
 	//Modification user
 	@Column(name="MOD_USER")
 	private String modUser;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Family family;
 
-	public Schedule() {
+	public Member() {
 		//empty for hibernate
 	}
-
-	public Schedule(Member member, Meal meal, Date day, Date creationTime, Date modTime, String modUser) {
+	
+	public Member(String name, Date creationTime, Date modTime, String modUser, Family family) {
 		super();
-		this.member = member;
-		this.meal = meal;
-		this.day = day;
+		this.name = name;
 		this.creationTime = creationTime;
 		this.modTime = modTime;
 		this.modUser = modUser;
+		this.family = family;
 	}
 
-	
-	
 	public Long getId() {
 		return id;
 	}
@@ -70,28 +62,12 @@ public class Schedule
 		this.id = id;
 	}
 
-	public Member getMember() {
-		return member;
+	public String getName() {
+		return name;
 	}
 
-	public void setMember(Member member) {
-		this.member = member;
-	}
-
-	public Meal getMeal() {
-		return meal;
-	}
-
-	public void setMeal(Meal meal) {
-		this.meal = meal;
-	}
-
-	public Date getDay() {
-		return day;
-	}
-
-	public void setDay(Date day) {
-		this.day = day;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public Date getCreationTime() {
@@ -118,6 +94,14 @@ public class Schedule
 		this.modUser = modUser;
 	}
 
+	public Family getFamily() {
+		return family;
+	}
+
+	public void setFamily(Family family) {
+		this.family = family;
+	}
+
 	@Override
 	public int hashCode() {
 		return getClass().hashCode();
@@ -131,31 +115,21 @@ public class Schedule
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Schedule other = (Schedule) obj;
+		Member other = (Member) obj;
 		if (creationTime == null) {
 			if (other.creationTime != null)
 				return false;
 		} else if (!creationTime.equals(other.creationTime))
 			return false;
-		if (day == null) {
-			if (other.day != null)
+		if (family == null) {
+			if (other.family != null)
 				return false;
-		} else if (!day.equals(other.day))
+		} else if (!family.equals(other.family))
 			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
-			return false;
-		if (meal == null) {
-			if (other.meal != null)
-				return false;
-		} else if (!meal.equals(other.meal))
-			return false;
-		if (member == null) {
-			if (other.member != null)
-				return false;
-		} else if (!member.equals(other.member))
 			return false;
 		if (modTime == null) {
 			if (other.modTime != null)
@@ -167,12 +141,17 @@ public class Schedule
 				return false;
 		} else if (!modUser.equals(other.modUser))
 			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Schedule [id=" + id + ", member=" + member + ", meal=" + meal + ", day=" + day + ", creationTime="
-				+ creationTime + ", modTime=" + modTime + ", modUser=" + modUser + "]";
+		return "Member [id=" + id + ", name=" + name + ", creationTime=" + creationTime + ", modTime=" + modTime
+				+ ", modUser=" + modUser + ", family=" + family + "]";
 	}
 }
