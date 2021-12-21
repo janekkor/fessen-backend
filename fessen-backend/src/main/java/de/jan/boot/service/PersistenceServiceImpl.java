@@ -12,6 +12,7 @@ import de.jan.boot.model.Family;
 import de.jan.boot.model.Meal;
 import de.jan.boot.model.Member;
 import de.jan.boot.model.Schedule;
+import de.jan.boot.repository.FamilyDao;
 import de.jan.boot.repository.MealDao;
 import de.jan.boot.repository.MemberDao;
 import de.jan.boot.repository.ScheduleDao;
@@ -20,6 +21,9 @@ import de.jan.boot.repository.ScheduleDao;
 @Service
 public class PersistenceServiceImpl implements PersistenceService {
 
+	@Autowired
+	private FamilyDao familyDao;	
+	
 	@Autowired
 	private MealDao mealDao;
 	
@@ -30,12 +34,14 @@ public class PersistenceServiceImpl implements PersistenceService {
 	private ScheduleDao scheduleDao;
 
 	@Override
-	public List<Meal> readAllMeals(Family family) {
+	public List<Meal> readAllMeals(String familyCode) {
+		Family family = familyDao.findByCode(familyCode);
 		return mealDao.findAllByFamily(family);
 	}
 	
 	@Override
-	public List<Member> readAllMembers(Family family) {
+	public List<Member> readAllMembers(String familyCode) {
+		Family family = familyDao.findByCode(familyCode);
 		return memberDao.findAllByFamily(family);
 	}
 	
@@ -45,8 +51,8 @@ public class PersistenceServiceImpl implements PersistenceService {
 	}
 	
 	@Override
-	public List<Schedule> readAllSchedulesForFamily(Family family) {
-		return scheduleDao.findAllByFamily(family);
+	public List<Schedule> readAllSchedulesForFamily(String familyCode) {
+		return scheduleDao.findAllByFamily(familyCode);
 	}
 	
 	@Override

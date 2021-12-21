@@ -25,11 +25,11 @@ public class Schedule
 	private Long id;
 	
 	@OneToOne
-	@JoinColumn(name = "MEMBER")
+	@JoinColumn(name = "MEMBER_ID")
 	private Member member;
 	
 	@OneToOne
-	@JoinColumn(name="MEAL")
+	@JoinColumn(name="MEAL_ID")
 	private Meal meal;
 	
 	@Column(name="DAY")

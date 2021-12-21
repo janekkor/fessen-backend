@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * Meal class
  *
@@ -42,6 +44,7 @@ public class Meal
 	@Column(name="MOD_USER")
 	private String modUser;
 	
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Family family;	
 	
@@ -170,6 +173,6 @@ public class Meal
 	@Override
 	public String toString() {
 		return "Meal [id=" + id + ", name=" + name + ", description=" + description + ", creationTime=" + creationTime
-				+ ", modTime=" + modTime + ", modUser=" + modUser + ", family=" + family + "]";
+				+ ", modTime=" + modTime + ", modUser=" + modUser + ", familyCode=" + family.getCode() + "]";
 	}
 }

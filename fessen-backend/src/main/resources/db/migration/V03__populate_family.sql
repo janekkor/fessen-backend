@@ -1,0 +1,2 @@
+INSERT INTO FAMILY (ID, NAME, CODE, PASSWORD, CREATION_TIME, MOD_USER, MOD_TIME) 
+VALUES (1, 'Korolko', 'korolko', 'korolko', parsedatetime('2021-12-19 00:00:00.000', 'yyyy-MM-dd hh:mm:ss.SS'), 'admin', parsedatetime('2021-12-19 00:00:00.000', 'yyyy-MM-dd hh:mm:ss.SS'));
