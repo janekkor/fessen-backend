@@ -33,12 +33,12 @@ public class FessenController {
 		return allFamilyMembers;
 	}
 
-	@RequestMapping("/schedules")
+	@RequestMapping("/familyschedules")
 	public List<Schedule> retrieveSchedules(@RequestBody String familyCode) {
 		return persistenceService.readAllSchedulesForFamily(familyCode);
 	}
 	
-	@RequestMapping(value = "/schedule", method = RequestMethod.POST)
+	@RequestMapping(value = "/saveschedule", method = RequestMethod.POST)
 	ResponseEntity<?> newSchedule(@RequestBody Schedule schedule) {
 		
 		System.out.println("************* POST schedule auf der Serverseite. Received schedule with id: " + schedule.getId() + " *************************");
