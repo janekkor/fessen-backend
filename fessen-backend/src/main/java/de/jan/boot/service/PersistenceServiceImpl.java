@@ -47,7 +47,7 @@ public class PersistenceServiceImpl implements PersistenceService {
 	
 	@Override
 	public Schedule retrieveScheduleForMemberAndDay(Member member, Date day) {
-		return scheduleDao.findAllByMemberAndDay(member, day);
+		return scheduleDao.findByMemberAndDay(member, day);
 	}
 	
 	@Override
@@ -57,7 +57,7 @@ public class PersistenceServiceImpl implements PersistenceService {
 	
 	@Override
 	public Schedule saveSchedule(Schedule newSchedule) {
-		Schedule dbSchedule = scheduleDao.findAllByMemberAndDay(newSchedule.getMember(), newSchedule.getDay());
+		Schedule dbSchedule = scheduleDao.findByMemberAndDay(newSchedule.getMember(), newSchedule.getDay());
 		
 		if (dbSchedule != null) {
 			dbSchedule.setMeal(newSchedule.getMeal());
@@ -65,5 +65,11 @@ public class PersistenceServiceImpl implements PersistenceService {
 		}
 		
 		return scheduleDao.save(newSchedule);
+	}
+
+	@Override
+	public Schedule readScheduleForFamilyAndDay(String familyCode, Date day) {
+		Schedule foundSchedule = scheduleDao.findByFamilyAndDay(familyCode, day);
+		return foundSchedule;
 	}
 }

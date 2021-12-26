@@ -19,4 +19,6 @@ public interface PersistenceService {
 	List<Schedule> readAllSchedulesForFamily(String familyCode);
 	
 	Schedule saveSchedule(Schedule newSchedule);
+
+	Schedule readScheduleForFamilyAndDay(String familyCode, Date day);
 }
