@@ -21,4 +21,8 @@ public interface PersistenceService {
 	Schedule saveSchedule(Schedule newSchedule);
 
 	Schedule readScheduleForFamilyAndDay(String familyCode, Date day);
+
+	void deleteSchedule(Schedule schedule);
+	
+	Family readFamily(String familyCode);
 }

@@ -8,10 +8,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *
  */
 @SpringBootApplication
-public class BackendApp 
+public class FessenBackendApp 
 {
     public static void main( String[] args )
     {
-    	SpringApplication.run(BackendApp.class, args);
+    	SpringApplication.run(FessenBackendApp.class, args);
     }
 }

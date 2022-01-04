@@ -66,10 +66,20 @@ public class PersistenceServiceImpl implements PersistenceService {
 		
 		return scheduleDao.save(newSchedule);
 	}
+	
+	@Override
+	public void deleteSchedule(Schedule newSchedule) {
+		scheduleDao.delete(newSchedule);
+	}	
 
 	@Override
 	public Schedule readScheduleForFamilyAndDay(String familyCode, Date day) {
 		Schedule foundSchedule = scheduleDao.findByFamilyAndDay(familyCode, day);
 		return foundSchedule;
+	}
+
+	@Override
+	public Family readFamily(String familyCode) {
+		return familyDao.findByCode(familyCode);
 	}
 }
