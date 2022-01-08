@@ -155,6 +155,6 @@ public class Member
 	@Override
 	public String toString() {
 		return "Member [id=" + id + ", name=" + name + ", creationTime=" + creationTime + ", modTime=" + modTime
-				+ ", modUser=" + modUser + ", familyCode=" + family.getCode() + "]";
+				+ ", modUser=" + modUser + ", familyCode=" + (family == null ? null : family.getCode()) + "]";
 	}
 }

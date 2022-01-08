@@ -38,43 +38,41 @@ public class FessenController {
 	
 	@PostMapping("/familymeals")
 	public List<Meal> retrieveAllMealsForFamily(@RequestBody String familyCode) {
-		logger.debug("retrieveAllMealsForFamily has been called with the parameter familyCode: {0}", familyCode);
+		logger.debug("retrieveAllMealsForFamily has been called with the parameter familyCode: {}", familyCode);
 		return persistenceService.readAllMeals(familyCode);
 	}
 	
 	@PostMapping("/familymembers")
 	public List<Member> retrieveAllMembersForFamily(@RequestBody String familyCode) {
-		logger.debug("retrieveAllMembersForFamily has been called with the parameter familyCode: {0}", familyCode);
+		logger.debug("retrieveAllMembersForFamily has been called with the parameter familyCode: {}", familyCode);
 		List<Member> allFamilyMembers = persistenceService.readAllMembers(familyCode);
 		return allFamilyMembers;
 	}
 
 	@PostMapping("/familyschedules")
 	public List<Schedule> retrieveSchedules(@RequestBody String familyCode) {
-		logger.debug("retrieveSchedules has been called with the parameter familyCode: {0}", familyCode);
+		logger.debug("retrieveSchedules has been called with the parameter familyCode: {}", familyCode);
 		return persistenceService.readAllSchedulesForFamily(familyCode);
 	}
 	
 	
 	@PostMapping("/familydateschedule")
 	public Schedule retrieveScheduleForFamilyAndDate(@RequestBody FamilyDate familyDate) {
-		logger.debug("retrieveScheduleForFamilyAndDate has been called with the parameter familyDate: {0}", familyDate);
+		logger.debug("retrieveScheduleForFamilyAndDate has been called with the parameter familyDate: {}", familyDate);
 		Schedule scheduleFromDB = persistenceService.readScheduleForFamilyAndDay(familyDate.getFamilyCode(), familyDate.getDay());
 		return scheduleFromDB;
 	}
 	
 	@PostMapping("/saveschedule")
-	public Schedule newSchedule(@RequestBody Schedule schedule) {
-		logger.debug("newSchedule has been called with the parameter schedule: {0}", schedule);
-		schedule.setId(null);
-		schedule.setModTime(new Date());
+	public Schedule saveSchedule(@RequestBody Schedule schedule) {
+		logger.debug("saveSchedule has been called with the parameter schedule: {}", schedule);
 		Schedule savedSchedule = persistenceService.saveSchedule(schedule);
 		return savedSchedule;
 	}
 	
 	@PostMapping("/deleteschedule")
 	public boolean deleteSchedule(@RequestBody Schedule schedule) {
-		logger.debug("deleteSchedule has been called with the parameter schedule: {0}", schedule);
+		logger.debug("deleteSchedule has been called with the parameter schedule: {}", schedule);
 		persistenceService.deleteSchedule(schedule);
 		//true will be returned, if no exception occurs. Otherwise the "return true" will not be reached and executed  
 		return true;
@@ -82,7 +80,7 @@ public class FessenController {
 	
 	@GetMapping("/login")
 	public ResponseEntity<Object> login(@RequestHeader("Authorization") String familyCodePass) {
-		logger.debug("login has been called with the parameter familyCodePass: {0}", familyCodePass);
+		logger.debug("login has been called with the parameter familyCodePass: {}", familyCodePass);
 		System.out.println("Authorization: " + familyCodePass);
 		StringTokenizer authorizationTokenizer = new StringTokenizer(familyCodePass);
 		authorizationTokenizer.nextToken();  //Returns "Basic"

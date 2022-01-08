@@ -58,12 +58,16 @@ public class PersistenceServiceImpl implements PersistenceService {
 	@Override
 	public Schedule saveSchedule(Schedule newSchedule) {
 		Schedule dbSchedule = scheduleDao.findByMemberAndDay(newSchedule.getMember(), newSchedule.getDay());
+		Date currentTime = new Date();
 		
 		if (dbSchedule != null) {
 			dbSchedule.setMeal(newSchedule.getMeal());
+			dbSchedule.setModTime(currentTime);
 			return scheduleDao.save(dbSchedule);
 		}
 		
+		newSchedule.setCreationTime(currentTime);
+		newSchedule.setModTime(currentTime);
 		return scheduleDao.save(newSchedule);
 	}
 	

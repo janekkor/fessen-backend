@@ -172,7 +172,12 @@ public class Meal
 
 	@Override
 	public String toString() {
-		return "Meal [id=" + id + ", name=" + name + ", description=" + description + ", creationTime=" + creationTime
-				+ ", modTime=" + modTime + ", modUser=" + modUser + ", familyCode=" + family.getCode() + "]";
+		return "Meal [id=" + id + 
+				", name=" + name + 
+				", description=" + description + 
+				", creationTime=" + creationTime + 
+				", modTime=" + modTime + 
+				", modUser=" + modUser + 
+				", familyCode=" + (family == null ? null : family.getCode()) + "]";
 	}
 }
