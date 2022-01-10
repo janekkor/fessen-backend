@@ -93,7 +93,7 @@ public class FessenController {
 		String password = familyCodePassTokenizer.nextToken(":");
 		if (!loginOK(familyCode, password)) {
 			throw new ResponseStatusException(
-			           HttpStatus.FORBIDDEN, "User or password not correct!");
+			           HttpStatus.UNAUTHORIZED, "User or password missing or incorrect!");
 		}
 		return ResponseEntity.ok("Authentication OK");
 	}
